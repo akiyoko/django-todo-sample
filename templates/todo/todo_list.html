@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>TODOリスト</h1>
+<p>今日は {{ today }} です。</p>
+
+{% if todo_list %}
+<table class="table">
+  <thead>
+  <tr>
+    <th>タイトル</th>
+    <th>期限日</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for todo in todo_list %}
+  <tr>
+    <td width="60%">{{ todo.title }}</td>
+    <td>
+      <span {% if today > todo.expiration_date %}style="color:red;"{% endif %}>
+      {{ todo.expiration_date|default_if_none:"なし" }}
+      </span>
+    </td>
+    <td><a href="/todo/update/{{ todo.pk }}/">変更</a></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+TODOリストがありません。
+{% endif %}
+
+<a class="btn btn-primary" href="/todo/create/">追加</a>
+{%endblock%}
