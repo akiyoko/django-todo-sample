@@ -12,9 +12,7 @@ class TestTodoListView(TestCase):
         self.todo = Todo.objects.create(title='test-1', expiration_date=self.today)
 
     def test_get_success(self):
-        """
-        /todo/update/<pk>/へのGETリクエスト（正常系）
-        """
+        """/todo/update/<pk>/へのGETリクエスト（正常系）"""
         # テストクライアントでGETリクエストをシミュレート
         response = self.client.get('/todo/update/{}/'.format(self.todo.id))
 
@@ -24,9 +22,7 @@ class TestTodoListView(TestCase):
         self.assertContains(response, '<h1>TODO変更</h1>')
 
     def test_post_success(self):
-        """
-        /todo/update/<pk>/へのPOSTリクエスト（正常系）
-        """
+        """/todo/update/<pk>/へのPOSTリクエスト（正常系）"""
         # テストクライアントでPOSTリクエストをシミュレート
         response = self.client.post('/todo/update/{}/'.format(self.todo.id), {
             'title': 'test-1-updated',
@@ -42,9 +38,7 @@ class TestTodoListView(TestCase):
         self.assertEqual(todo.title, 'test-1-updated')
 
     def test_post_if_title_is_blank(self):
-        """
-        /todo/update/<pk>/へのPOSTリクエスト（バリデーションNG）
-        """
+        """/todo/update/<pk>/へのPOSTリクエスト（バリデーションNG）"""
         # テストクライアントでPOSTリクエストをシミュレート
         response = self.client.post('/todo/update/{}/'.format(self.todo.id), {
             'title': '',
