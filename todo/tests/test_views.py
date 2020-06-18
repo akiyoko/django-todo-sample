@@ -1,11 +1,11 @@
 from datetime import date
 from django.test import TestCase
 
-from .models import Todo
+from todo.models import Todo
 
 
 class TestTodoListView(TestCase):
-    """TestTodoListのテスト"""
+    """TodoListViewのテスト"""
 
     def setUp(self):
         self.today = date(2020, 6, 1)
